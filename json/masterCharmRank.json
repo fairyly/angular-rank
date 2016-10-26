@@ -1,0 +1,67 @@
+{
+  "code": "000000",
+  "msg": "",
+  "data": {
+      "masterCharmRank": [{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      },{
+        "masterId": 1000,
+        "nickname": "我是昵称",
+        "icon": "./upload/1111.png",
+        "platAcc": 12345678,
+        "subStatus": 0
+      }]
+  }
+}

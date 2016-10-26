@@ -1,0 +1,16 @@
+{
+  "code": "000000",
+  "msg": "SUCCESS",
+  "data": {
+    "masterId": 12345678,
+    "nickName": "我是昵称",
+    "icon": "./upload/1111.png",
+    "sex": 1,
+    "masterLevel": 5,
+    "fanNum": 100,
+    "subNum": 100,
+    "sendXiuBi": 100,
+    "gainXiuDou": 100,
+    "subStatus":0
+  }
+}
