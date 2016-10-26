@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no, address=no">
+		<meta name="author" content="Storm">
+		<title>人气/魅力排行榜</title>
+		<script>
+			(function(a, b, c) {
+				'use strict';
+
+				function e() {
+					var e = d.clientWidth;
+					e >= c ? e = c : a >= e && (e = a);
+					d.style.fontSize = 100 * (e / b) + 'px'
+				}
+				var d = document.getElementsByTagName('html')[0];
+				e();
+				window.onresize = e
+			}(320, 640, 640))
+		</script>
+		<link href="https://cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://cdn.bootcss.com/angular.js/1.5.7/angular.min.js"></script>
+	</head>
+
+	<body>
+
+		<div class="wrapper" ng-app="leaderboard" ng-controller="leaderboard">
+
+			<div class="swiper-pagination"></div>
+
+			<!-- swiper -->
+			<div class="swiper-container" id="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" id="ranking">
+
+						<!-- 金牌 -->
+						<div class="gold medal">
+							<div class="medal-img" ng-click="getUserInfo(masterPopularRank[0])"><img ng-src="{{masterPopularRank[0].icon}}" alt="{{masterPopularRank[0].nickname}}" /><span class="gold-crown"></span></div>
+							<p class="medal-title">{{masterPopularRank[0].nickname}}
+								<button ng-if="masterPopularRank[0].subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+								<button ng-if="masterPopularRank[0].subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(masterPopularRank[0])">关注</button>
+							</p>
+							<p class="medal-code">喵号 {{masterPopularRank[0].platAcc}}</p>
+						</div>
+						<!-- /金牌 -->
+
+						<!-- 银牌 -->
+						<div class="silver medal">
+							<div class="medal-img" ng-click="getUserInfo(masterPopularRank[1])"><img ng-src="{{masterPopularRank[1].icon}}" alt="{{masterPopularRank[1].nickname}}" /></div>
+							<p class="medal-title">{{masterPopularRank[1].nickname}}
+								<button ng-if="masterPopularRank[1].subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+								<button ng-if="masterPopularRank[1].subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(masterPopularRank[1])">关注</button>
+							</p>
+							<p class="medal-code">喵号 {{masterPopularRank[1].platAcc}}</p>
+						</div>
+						<!-- /银牌 -->
+
+						<!-- 铜牌 -->
+						<div class="copper medal">
+							<div class="medal-img" ng-click="getUserInfo(masterPopularRank[2])"><img ng-src="{{masterPopularRank[2].icon}}" alt="{{masterPopularRank[2].nickname}}" /></div>
+							<p class="medal-title">{{masterPopularRank[2].nickname}}
+								<button ng-if="masterPopularRank[2].subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+								<button ng-if="masterPopularRank[2].subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(masterPopularRank[2])">关注</button>
+							</p>
+							<p class="medal-code">喵号 {{masterPopularRank[2].platAcc}}</p>
+						</div>
+						<!-- /铜牌 -->
+
+						<!-- 人气榜列表 -->
+						<ul class="list">
+							<li ng-repeat="master in masterPopularRank" ng-if="$index > 2" class="list-item">
+								<div class="list-num">{{$index+1}}</div>
+								<div class="list-img" ng-click="getUserInfo(master)"><img ng-src="{{master.icon}}" src="" alt="{{master.nickname}}" /></div>
+								<div class="list-info">
+									<div class="list-name">{{master.nickname}}
+										<button ng-if="master.subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+										<button ng-if="master.subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(master)">关注</button>
+									</div>
+									<div class="list-code">喵号 {{master.platAcc}}</div>
+								</div>
+							</li>
+						</ul>
+						<!-- /人气榜列表-->
+
+					</div>
+
+					<!--魅力榜-->
+					<div class="swiper-slide" id="charm">
+
+						<!-- 金牌 -->
+						<div class="gold medal">
+							<div class="medal-img" ng-click="getUserInfo(masterCharmRank[0])"><img src="" ng-src="{{masterCharmRank[0].icon}}" alt="{{masterCharmRank[0].nickname}}" /><span class="gold-crown"></span></div>
+							<p class="medal-title">{{masterCharmRank[0].nickname}}
+								<button ng-if="masterCharmRank[0].subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+								<button ng-if="masterCharmRank[0].subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(masterCharmRank[0])">关注</button>
+							</p>
+							<p class="medal-code">喵号 {{masterCharmRank[0].platAcc}}</p>
+						</div>
+						<!-- /金牌 -->
+
+						<!-- 银牌 -->
+						<div class="silver medal">
+							<div class="medal-img" ng-click="getUserInfo(masterCharmRank[1])"><img src="" ng-src="{{masterCharmRank[1].icon}}" alt="{{masterCharmRank[1].nickname}}" /></div>
+							<p class="medal-title">{{masterCharmRank[1].nickname}}
+								<button ng-if="masterCharmRank[1].subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+								<button ng-if="masterCharmRank[1].subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(masterCharmRank[1])">关注</button>
+							</p>
+							<p class="medal-code">喵号 {{masterCharmRank[1].platAcc}}</p>
+						</div>
+						<!-- /银牌 -->
+
+						<!-- 铜牌 -->
+						<div class="copper medal">
+							<div class="medal-img" ng-click="getUserInfo(masterCharmRank[2])"><img src="" ng-src="{{masterCharmRank[2].icon}}" alt="{{masterCharmRank[2].nickname}}" /></div>
+							<p class="medal-title">{{masterCharmRank[2].nickname}}
+								<button ng-if="masterCharmRank[2].subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+								<button ng-if="masterCharmRank[2].subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(masterCharmRank[2])">关注</button>
+							</p>
+							<p class="medal-code">喵号 {{masterCharmRank[2].platAcc}}</p>
+						</div>
+						<!-- /铜牌 -->
+
+						<!-- 魅力榜列表 -->
+						<ul class="list">
+							<li ng-repeat="master in masterCharmRank" ng-if="$index > 2" class="list-item">
+								<div class="list-num">{{$index + 1}}</div>
+								<div class="list-img" ng-click="getUserInfo(master)"><img ng-src="{{master.icon}}" src="" alt="{{master.nickname}}" /></div>
+								<div class="list-info">
+									<div class="list-name">{{master.nickname}}
+										<button ng-if="master.subStatus == 1" disabled type="button" class="btn-attention">已关注</button>
+										<button ng-if="master.subStatus == 0" type="button" class="btn-attention" ng-click="getFocus(master)">关注</button>
+									</div>
+									<div class="list-code">喵号 {{master.platAcc}}</div>
+								</div>
+							</li>
+						</ul>
+						<!-- /魅力榜列表 -->
+
+					</div>
+
+					<!--/魅力榜-->
+				</div>
+			</div>
+			<!-- /swiper -->
+
+			<!-- rule -->
+			<section class="rule">
+				<div class="rule-title"><span>活动规则</span></div>
+
+				<p>&nbsp;•&nbsp;人气榜：榜单根据主播关注增加数量统计得出排行，截取当天往前30天内数据（不包括当天）。</p>
+				<p>&nbsp;•&nbsp;魅力榜：榜单根据主播喵粮增加数量统计得出排行，截取当天往前30天内数据（不包括当天）。</p>
+				<p>&nbsp;•&nbsp;本活动最终解释权归游戏猫所有。</p>
+			</section>
+			<!-- /rule -->
+
+			<!-- 关注失败 -->
+			<div class="popup failure" ng-hide="failureHide">
+				<div class="popup-backdrop"></div>
+				<div class="popup-content">
+					<a href="javascript:;" ng-click="failureHide = true" class="popup-close"><span class="icon icon-close"></span></a>
+					<div class="popup-body">{{failureMsg}}</div>
+					<div class="popup-footer"><button ng-click="failureHide = true" type="button" class="popup-btn popup-primary">确定</button></div>
+				</div>
+			</div>
+			<!-- /关注失败 -->
+
+			<!-- 个人资料 -->
+			<div class="popup info" ng-hide="infoHide">
+				<div class="popup-backdrop" ng-click="close()"></div>
+				<div class="popup-content">
+					<a href="javascript:;" ng-click="close()" class="popup-close"><span class="icon icon-close"></span></a>
+					<div class="popup-body">
+						<div class="info-img"><img ng-src="{{master.icon}}" alt="master.nickName" /></div>
+						<div class="info-name">{{master.nickName}}</div>
+						<div class="info-tag">
+							<span ng-if="master.sex == 2" class="icon icon-female"></span>
+							<span ng-if="master.sex == 1" class="icon icon-male"></span>
+							<span class="level">LV.{{master.masterLevel}}</span>
+						</div>
+						<div class="info-code">喵号: &nbsp;{{master.masterId}}</div>
+						<div class="info-text">
+							<div>粉丝: &nbsp;{{master.fanNum | company}}</div>
+							<div>关注: &nbsp;{{master.subNum | company}}</div>
+							<div>送出: &nbsp;{{master.sendXiuBi | company}}</div>
+							<div>喵粮: &nbsp;{{master.gainXiuDou | company}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /个人资料 -->
+
+			<!-- loading -->
+			<div ng-show="loading" class="loading"></div>
+			<!-- /loading -->
+
+		</div>
+		<script src="https://cdn.bootcss.com/Swiper/3.3.1/js/swiper.min.js"></script>
+		<script>
+			var local = true; //是否是本地环境 ,后端环境改成 false
+			var method = 'get';
+
+			if (local) {
+				var
+				// masterPopularRank = 'm/masterPopularRank.action',
+					masterPopularRank = './json/masterPopularRank.json', //人气榜接口
+					// masterCharmRank = 'm/getMasterCharmRank.action',
+					masterCharmRank = './json/masterCharmRank.json', //魅力榜接口
+					// getRoomUserInfo = 'm/getRoomUserInfo.action',
+					getRoomUserInfo = './json/info.json', //主播信息接口
+					// getFocusAction = '/m/focus.action',
+					getFocusAction = './json/focus.json'; //关注接口
+			} else {
+				var
+				// masterPopularRank = 'm/masterPopularRank.action',
+					masterPopularRank = 'm/masterPopularRank.action', //人气榜接口
+					// masterCharmRank = 'm/getMasterCharmRank.action',
+					masterCharmRank = 'm/getMasterCharmRank.action', //魅力榜接口
+					// getRoomUserInfo = 'm/getRoomUserInfo.action',
+					getRoomUserInfo = 'm/getRoomUserInfo.action', //主播信息接口
+					// getFocusAction = '/m/focus.action',
+					getFocusAction = '/m/focus.action'; //关注接口
+			}
+
+			//滑动切换        
+			var swiper = new Swiper('#swiper-container', {
+				resistanceRatio: 0,
+				pagination: '.swiper-pagination',
+				parallax: true,
+				paginationClickable: true,
+				resistance: '100%',
+				speed: 300,
+				paginationBulletRender: function(index, className) {
+					var name;
+					switch (index) {
+						case 0:
+							name = '主播人气榜';
+							className += ' ranking-btn';
+							break;
+						case 1:
+							name = '主播魅力榜';
+							className += ' charm-btn';
+							break;
+						default:
+							name = '';
+					}
+					return '<div class="' + className + '">' + name + '</div>';
+				}
+			});
+
+			var app = angular.module('leaderboard', []);
+
+			app.filter('company', function() {
+				return function(input) {
+					var output = input;
+
+					//小于10000 显示原始数据
+					if (input < 10000) {
+						output = input;
+						//小于100000 大于 10000	
+					} else if (input >= 10000 && input < 100000) {
+						output = (input / 10000 + "").substring(0, 3) + "万";
+						// 大于 100000	
+					} else {
+						output = Math.floor(input / 10000) + "万";
+					}
+					return output;
+				}
+			});
+
+			app.controller('leaderboard', function($scope, $http) {
+
+				$scope.failureHide = true; //关注失败弹出框
+				$scope.infoHide = true; //信息弹出框
+				$scope.loading = true;
+
+				$scope.unmove = function(event) {
+					event.preventDefault();
+				}
+
+				$scope.close = function() {
+						$scope.infoHide = true;
+						document.removeEventListener("touchmove", $scope.unmove, false);
+					}
+					//封装ajax请求
+				var ajax = function(action, data, callback) {
+
+					$http[method](action, data)
+						.success(function(req) {
+							if (req.code === '000000') {
+								callback(req.data);
+							} else {
+								$scope.failureHide = false;
+								$scope.infoHide = true; //退出弹出框
+								$scope.failureMsg = req.msg;
+
+							}
+						})
+						.error(function() {
+							$scope.failureHide = false;
+							$scope.infoHide = true; //退出弹出框
+							$scope.failureMsg = '网络错误请重试';
+						});
+				};
+
+				// 直播人气榜
+				ajax(masterPopularRank, {}, function(data) {
+					$scope.loading = false;
+					$scope.masterPopularRank = data.masterPopularRank; //人气主播列表
+
+				});
+
+				// 直播魅力榜
+				ajax(masterCharmRank, {}, function(data) {
+					$scope.loading = false;
+					$scope.masterCharmRank = data.masterCharmRank; //魅力主播列表
+
+				});
+
+				// 获取直播个人信息 index当前索引,type = 0 人气，type = 1 魅力
+				$scope.getUserInfo = function(master) {
+					//获取主播而信息
+					ajax(getRoomUserInfo, {
+						userId: master.masterId
+					}, function(data) {
+						$scope.infoHide = false;
+						$scope.master = data;
+						document.addEventListener("touchmove", $scope.unmove, false);
+					})
+				};
+
+				// 关注主播
+				$scope.getFocus = function(master) {
+					//关注请求
+					ajax(getFocusAction, {
+						masterId: master.masterId
+					}, function(data) {
+						master.subStatus = 1;
+					});
+				}
+			});
+		</script>
+	</body>
+
+</html>
